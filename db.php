@@ -1,13 +1,15 @@
 <?php
-$host = 'centerbeam.proxy.rlwy.net'; // dari "host" di URL MySQL Railway
-$port = 58148;                        // dari "port" di URL
-$user = 'root';                      // dari "user" di URL
-$pass = 'slEkPzynjxRTjrHNOiFYPvuZfgdPPSae';                // dari "password" di URL, bisa klik "show" untuk lihat
-$db   = 'railway';                   // biasanya nama DB-nya memang 'railway'
+$host = getenv("mysql.railway.internal") ?: "your_mysql_host_here";
+$port = getenv("3306") ?: "your_mysql_port_here";
+$user = getenv("root") ?: "your_mysql_user_here";
+$password = getenv("KVxrVlHxERBNEiELjoMKgxoiOKbbnRMo") ?: "your_mysql_password_here";
+$database = getenv("railway") ?: "your_mysql_database_here";
 
-$conn = new mysqli($host, $user, $pass, $db, $port);
+// Create connection
+$conn = new mysqli($host, $user, $password, $database, $port);
 
+// Check connection
 if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 ?>
